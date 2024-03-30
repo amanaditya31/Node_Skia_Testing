@@ -9,15 +9,16 @@ use std::mem;
 use skia_safe::{surfaces, Color, Data, EncodedImageFormat, Paint, PaintStyle, Path, Surface};
 
 #[napi]
-pub struct Canvas {
+pub struct SkiaCanvas {
     surface: Surface,
     path: Path,
     paint: Paint,
 }
 
 #[napi]
-impl Canvas {
-    pub fn new(width: i32, height: i32) -> Canvas {
+impl SkiaCanvas {
+    #[napi(constructor)]
+    pub fn new(width: i32, height: i32) -> SkiaCanvas {
         let mut surface = surfaces::raster_n32_premul((width, height)).expect("surface");
         let path = Path::new();
         let mut paint = Paint::default();
@@ -25,7 +26,7 @@ impl Canvas {
         paint.set_anti_alias(true);
         paint.set_stroke_width(1.0);
         surface.canvas().clear(Color::WHITE);
-        Canvas {
+        SkiaCanvas {
             surface,
             path,
             paint,

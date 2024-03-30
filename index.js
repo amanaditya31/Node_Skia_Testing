@@ -295,7 +295,7 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { Canvas, sum } = nativeBinding
+const { SkiaCanvas, sum } = nativeBinding
 
-module.exports.Canvas = Canvas
+module.exports.SkiaCanvas = SkiaCanvas
 module.exports.sum = sum
